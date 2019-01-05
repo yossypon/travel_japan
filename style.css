@@ -1,0 +1,848 @@
+@charset "UTF-8";
+/* CSS Document */
+
+
+html{
+	font-size: 62.5%;
+}
+
+body{
+	background-color: #f1f1f1;
+	font-family: 'Source Code Pro', monospace;
+	color: #333;
+}
+
+/* ------------ナビゲーションここから！--------------------- */
+
+.navigation__checkbox {
+	display: none; 
+}
+
+.navigation__button {
+	background-color: rgba(26, 26, 26, 0.85);
+  	height: 7rem;
+  	width: 7rem;
+  	position: fixed;
+  	top: 6rem;
+  	right: 6rem;
+  	border-radius: 50%;
+  	z-index: 2000; /* 常にページ最前面に出ているように */
+  	box-shadow: 0 .1rem .3rem rgba(26, 26, 26, 0.85);
+  	text-align: center;
+	cursor: pointer; 
+}
+
+.navigation__background {
+/* クリックして広がったとき用のバックグラウンド */
+	height: 6rem;
+	width: 6rem;
+	border-radius: 50%;
+	position: fixed;
+	top: 6.5rem;
+	right: 6.5rem;
+	background-image: radial-gradient(rgba(198, 173, 92, 0.427),rgba(176, 127, 43, 0.304));
+	z-index: 1000;
+	transition: transform .8s;
+}
+
+.navigation__nav { /* ulとliを囲んでいるnavタグ */
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: -900px;
+	z-index: 1500;
+	opacity: 0;
+	width: 0;
+	transition: all .8s;
+}
+  
+.navigation__list { /* 中のリストが中央に揃うように */
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	list-style: none;
+	text-align: center;
+	width: 100%; 
+}
+
+.navigation__item { /* リスト要素それぞれの隙間幅 */
+	margin: 1rem; 
+}
+  
+.navigation__link:link, 
+.navigation__link:visited { /*リストそれぞれの文字 */
+	display: inline-block;
+	font-size: 3.5rem;
+	font-weight: 1000;
+	padding: 1rem 2rem;
+	color: #fff;
+	text-decoration: none;
+	text-transform: uppercase;
+	background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #fff 50%);
+	background-size: 220%;
+	transition: all .4s; 
+}
+  
+.navigation__link:link span, 
+.navigation__link:visited span {
+	margin-right: 1.5rem;
+	display: inline-block; 
+}
+  
+.navigation__link:hover, 
+.navigation__link:active { /* リンクのホバー時 */
+	background-position: 100%;
+	color: rgb(55, 55, 55);
+	transform: translateX(1rem); 
+}
+
+.navigation__checkbox:checked ~ .navigation__background {
+	transform: scale(80);
+}
+  
+.navigation__checkbox:checked ~ .navigation__nav {
+/*これやらないと文字が出ない*/
+	left: 0;
+	opacity: 1;
+	width: 100%; 
+}
+  
+.navigation__icon { /* ナビボタンの中の３本線の位置 */
+	position: relative;
+	margin-top: 3.5rem; 
+}
+
+.navigation__icon, 
+.navigation__icon::before, 
+.navigation__icon::after {
+/* ナビゲーション３本線の特徴 */
+	width: 3rem;
+	height: .3rem;
+	background-color: #777;
+	display: inline-block; 
+}
+	
+.navigation__icon::before, 
+.navigation__icon::after {
+	content: "";
+	position: absolute;
+	left: 0;
+	transition: all .2s;
+}
+	
+.navigation__icon::before {
+	top: -1rem;
+	transform-origin: center; 
+}
+	
+.navigation__icon::after {
+	top: 1rem;
+	transform-origin: center; 
+}
+  
+.navigation__button:hover .navigation__icon::before {
+	left: -0.5rem; 
+	transition: .4s;
+}
+  
+.navigation__button:hover .navigation__icon::after {
+	left: 0.5rem; 
+	transition: .4s;
+}
+  
+.navigation__checkbox:checked + .navigation__button .navigation__icon {
+	background-color: transparent; 
+}
+  
+.navigation__checkbox:checked + .navigation__button .navigation__icon::before {
+	top: .08rem;
+	left: 0rem;
+	transform: rotate(135deg);
+}
+  
+.navigation__checkbox:checked + .navigation__button .navigation__icon::after {
+	top: -.08rem;
+	left: 0rem;
+	transform: rotate(-135deg);
+}
+
+/* ------------ナビゲーションここまで--------------------- */
+/*---------headderpageここから---------------------------*/
+
+/*---センターの文字３つ--------*/
+
+.site-info>h1{
+	font-size: 5rem;
+}
+
+@keyframes site-title-hover{
+	0%{ color: rgba(0,0,0,0); 
+	    transform:translate(10rem,-40rem)  }
+	5%{ transform: translate(1rem,-15rem)}
+	15%{ transform: translate(-10rem,-35rem)}
+	20%{ transform: translate(1rem,-15rem)}
+	25%{ transform: translate(5rem,-22rem)}
+	30%{ transform: translate(10rem,-30rem)}
+	45%{ transform: translate(-12rem,-25rem)}
+	50%{ color: #333;}
+	60%{ transform: translate(12rem,-17rem)}
+	80%{transform: translate(-10rem,-10rem)}
+	100%{ color: rgba(0,0,0,1);}
+}
+.site-info>h1{
+	animation: site-title-hover 6s linear .5s 1 normal ;
+	backface-visibility: hidden;
+}
+
+@keyframes sub-title-hover{
+	from{ color: rgba(0,0,0,0);}
+	to{ color: rgba(0,0,0,1);}
+}
+.site-info>p{
+	animation: sub-title-hover 11s ease .5s 1 normal ;
+	font-size: 3rem;
+}
+
+/*--------ボタン⬇︎-------------*/
+
+.button{
+	width: 20rem;
+	height: 5rem;
+	font-size: 3rem;
+	text-align: center;
+	position: relative;
+	background-color: white;
+	border-radius: 0.5rem;
+	align-self: center;
+	padding: .5rem 0 0 0 ;
+}
+
+.button:link,
+.button:visited{
+	text-decoration: none;
+}
+
+.button:hover{
+	box-shadow: 1px 1px 1px 1px black;
+	background: #F4F4F4;
+	transition: all .4s;
+	transform: translateY(-0.2rem);
+}
+
+.button:active {
+  	transform: translateY(-0.1px);
+}
+
+.button::after{
+	content:"";
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	border-radius: 0.5rem;
+	background-color: #fff;
+}
+
+.button:hover::after{
+	transform: scale(1.3 , 1.3);
+	opacity: 0;
+	transition: all .6s;
+}
+
+.headder{
+	background: linear-gradient(-45deg, rgba(229,219,206,0.8) 0%, rgba(229,219,206,0.2) 1%, rgba(232,202,157,0.8) 100%) , url(img/topkyoto.jpg) no-repeat;
+	background-size: cover; /* これが無いと画面サイズ変更するとレイアウト崩れる */
+	clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+  	-webkit-clip-path: polygon(0 0, 100% 0, 100% 80%, 0 100%);
+	height: 76rem;
+	width: auto;
+	display: grid;
+	grid-template-rows:repeat(3,1fr);
+	grid-template-columns:repeat(3,1fr);
+	grid-gap:0;
+}
+
+.tori-icon{
+	margin: 3.5rem;
+}
+
+.site-info{
+	margin-top: -10px; /* 本当に中央だと目の錯覚で下にあるように見えるから少し上に上げておく */
+	grid-row: 2/3;
+	grid-column: 2/3;
+	display: flex;
+	flex-direction: column;
+}
+
+.site-info a{
+	text-decoration: none;
+	color: #000;
+	font-size: 2.4rem;
+	line-height: 1.8;
+}
+
+/*---------headerpageここまで-------------------------------
+-------------------------------------------------------*/
+
+/*---------2ndpageここから-------------------------------
+-------------------------------------------------------*/
+
+.second{
+	background-color: #f1f1f1;
+	width: auto;
+	height: 76rem;
+}
+
+.main-2nd{
+	font-size: 4.1rem;
+	text-align: center;
+	margin: 7rem 0 0 0;
+	background: linear-gradient(to left , #654206 , #5b4d23 , rgb(45, 45, 45));
+	background-clip: text;
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
+/*--------------------
+--------------------*/
+
+.content{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-start;
+}
+
+.info1{
+	font-size: 2rem;
+	width: 38rem;
+	height: 25rem;
+	margin: 1rem 2rem;
+}
+
+.info2{
+	font-size: 2rem;
+	width: 50rem;
+	height: 14rem;
+	margin: 1rem 2rem;
+}
+
+/*--------リンクボタン----------------*/
+
+.learn-more{
+	font-size: 1.8rem;
+	color: rgb(48, 25, 5);
+	border-bottom: rgb(48, 25, 5) 1px solid; 
+	margin: 5rem 2rem 2rem 2rem;
+	display: inline-block;
+}
+
+.learn-more:link,
+.learn-more:visited{
+	text-decoration: none;
+}
+
+.learn-more:hover{
+	background-color: rgba(48, 25, 5, 0.666);
+	color: rgba(255, 255, 255, 0.934);
+	transition: .5s;
+}
+
+.learn-more:active{
+	transform: translateY(-1px);
+	box-shadow: 1px 1px 1px 1px rgb(48, 25, 5);
+}
+
+/*---------------------------------------
+---３枚の画像を表示、重ねる、シャドウとか------*/
+
+.img-2nd{
+	display: grid;
+	grid-template-rows: repeat(8,120px 1fr);
+	/*grid-template-columns: repeat(9,84px 1fr);*/      /* check! */
+}
+
+.autumn-kyoto{
+	box-shadow: 2px 2px 2px 2px #444;
+	transform: scale(1.3 , 1.3) ;
+	grid-row: 3/5 ;
+	grid-column: 5/8 ;
+}
+
+.summer-kyoto{
+	box-shadow: 2px 2px 2px 2px #444;
+	transform: scale(1.3 , 1.3) ;
+	grid-row: 4/6 ;
+	grid-column: 6/9 ;
+}
+
+.spring-kyoto{
+	box-shadow: 2px 2px 2px 2px #444;
+	transform: scale(1.3 , 1.3) ;
+	grid-row: 6/8 ;
+	grid-column: 4/7 ;
+}
+
+/*---------------------------
+---３枚の動き、ホバーなど------*/
+
+.pics_trio{
+	transition: all .15s;
+	outline-offset: 1rem;
+}
+
+.pics_trio:hover{
+	outline: 0.16rem solid #888;
+	transform: scale(1.35); /* 写真それぞれのサイズを上で1.3倍にしちゃってるから1.3以上の倍率に */
+	z-index: 10;
+}
+
+.img-2nd:hover .pics_trio:not(:hover){
+	transform: scale(1.25);
+}
+
+/*--------------------------------
+---画像とコンテンツのフレックス-------*/
+
+.second{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	
+}
+
+/*---------2ndpageここまで-------------------------------
+-------------------------------------------------------*/
+
+/*--------3rd-pageここから-------------------------------
+-------------------------------------------------------*/
+
+.outer{
+	transform: skewY(-7deg);
+	background: linear-gradient(-45deg, rgba(229,219,206,0.8) 0%, rgba(229,219,206,0.2) 1%, rgba(232,202,157,0.8) 100%) , url(img/thirdimage.jpg) no-repeat;
+}
+
+.third{
+	width: auto;
+	height: 76rem;
+    transform: skewY(7deg);
+    display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	align-items: center;
+}
+
+.third h2{
+	writing-mode: vertical-rl;
+	font-size: 5rem;
+	text-align: center;
+	background: linear-gradient(to left , #654206 , #5b4d23 , rgb(45, 45, 45));
+	background-clip: text;
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
+.panel{
+	width: 22rem;
+	height: 35rem;
+	background-color: rgba(255,255,255,0.4);
+	border:1px #000 solid;
+	border-radius: .4rem;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+}
+
+.panel:hover{
+	transform: translateY(-2rem);
+}
+
+.fab.fa-pagelines{
+	font-size: 10rem;
+	align-self: center;
+	padding: 1.5rem 0 0 0 ;
+	background: linear-gradient(to right , rgba(213, 105, 191, 0.75), rgba(205, 40, 152, 0.86) ) ;
+	background-clip: text;
+  	-webkit-background-clip: text;
+    color: transparent;
+}
+
+.fas.fa-leaf{
+	font-size: 10rem;
+	align-self: center;
+	padding: 1.5rem 0 0 0 ;
+	background: linear-gradient(to right , rgba(78, 211, 95, 0.75), rgba(20, 108, 2, 0.86) ) ;
+	background-clip: text;
+  	-webkit-background-clip: text;
+    color: transparent;
+}
+
+.fas.fa-cannabis{
+	font-size: 10rem;
+	align-self: center;
+	padding: 1.5rem 0 0 0 ;
+	background: linear-gradient(to right , rgba(244, 58, 58, 0.75), rgba(150, 14, 2, 0.86) ) ;
+	background-clip: text;
+  	-webkit-background-clip: text;
+    color: transparent;
+}
+
+.fas.fa-air-freshener{
+	font-size: 10rem;
+	align-self: center;
+	padding: 1.5rem 0 0 0 ;
+	background: linear-gradient(to right , rgba(66, 147, 179, 0.75), rgba(5, 130, 147, 0.86) ) ;
+	background-clip: text;
+  	-webkit-background-clip: text;
+    color: transparent;
+}
+	
+.season_panel_h{
+	font-size: 3rem;
+	text-align: center;
+}
+
+.season_panel_p{
+	font-size: 1.8rem;
+	line-height:1.3;
+	padding: 0 1rem 0 1rem;
+	transform: translateY(-3.5rem);
+}
+
+/*-カーソル合わせたら背景が浮き上がるように-*/
+.panel::after{
+	content: "";
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	background-color: #fff;
+	opacity: 0.4;
+}
+
+.panel:hover::after{
+	transform: scale(1.2);
+	opacity:0.1;
+	transition: .7s;
+}
+
+/*--------3rd-pageここまで-------------------------------
+-------------------------------------------------------*/
+
+/*--------4th-pageここから-------------------------------
+-------------------------------------------------------*/
+
+.forth{
+	background-color: #f1f1f1;
+	width: auto;
+	height: 76rem;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.main-4th{
+	font-size: 4.2rem;
+	text-align: center;
+	margin: 7rem 0 0 0;
+	background: linear-gradient(to left , #654206 , #5b4d23 , rgb(45, 45, 45));
+	background-clip: text;
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
+/*-----回転パネル----------
+------------------------*/
+
+.tour{
+	width: 30rem;
+	height: 50rem;
+	margin: 6rem 0rem ;
+	position: relative; /* 回転アイテム */
+	perspective: 150rem; /* 回転アイテム */
+}
+
+.tour_front{
+	border: .2rem rgba(62, 62, 62, 0.529) solid;
+	box-shadow: 2px 2px 2px 2px #888;
+	display: grid;
+	grid-template-rows: repeat(50,1rem);
+	grid-template-columns: repeat(30,1rem);
+	grid-gap: 0px;
+}
+
+.tour_front,
+.tour_back{
+	background-color: #fff;
+	height:100%;
+	width:100%;
+	transition:1.5s;
+	position: absolute;
+	top: 0;
+	left: 0;
+	backface-visibility: hidden;
+}
+
+.tour_back{
+	background-color: rgb(29, 15, 1);
+	transform:rotateY(180deg);
+	text-align: center;
+}
+
+.tour_back>.fab.fa-accusoft{
+	font-size: 18rem;
+	margin-top: 3rem;
+	color: rgb(100, 196, 237);
+}
+
+.tour_back>.fab.fa-gitlab{
+	font-size: 18rem;
+	margin-top: 3rem;
+	color: rgba(230, 88, 88, 1);
+}
+
+.tour_back>.fas.fa-braille{
+	font-size: 18rem;
+	margin-top: 3rem;
+	color: rgba(139, 228, 158, 1);
+}
+
+.price{
+	font-size: 3.3rem;
+	font-weight: lighter;
+	color: #fff ;
+}
+
+.book{
+	font-size: 2.5rem;
+	border:1px #333 solid;
+	background-color: white;
+	border-radius: .5rem;
+	padding:0 5rem;
+	margin: 5rem;
+	position: relative;
+}
+
+.book::after{
+	content:"";
+	display: inline-block;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: -1;
+	background-color:#fff;
+	border-radius: .5rem;
+}
+.book:hover::after{
+	transform:scale(1.4);
+	opacity:0;
+	transition: .7s;
+}
+
+.tour:hover .tour_front{
+	transform:rotateY(180deg);
+}
+.tour:hover .tour_back{
+	transform:rotateY(0);
+}
+
+/*-----回転パネル----------
+--------ここまで----------*/
+
+.back_tour01{
+	width: 30rem;
+	height: 22rem;
+	background: url(img/spring-kyoto_small.jpg) no-repeat;
+	grid-row: 1/23 ;
+	grid-column: 1/-1 ; /* 写真の位置 */
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.back_tour02{
+	width: 30rem;
+	height: 22rem;
+	background: url(img/summer-kyoto_small.jpg) no-repeat;
+	grid-row: 1/23 ;
+	grid-column: 1/-1 ; /* 写真の位置 */
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+.back_tour03{
+	width: 30rem;
+	height: 22rem;
+	background: url(img/autumn-kyoto_small.jpg) no-repeat;
+	grid-row: 1/23 ;
+	grid-column: 1/-1 ; /* 写真の位置 */
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+.tour_box{
+	width: 26rem;
+	height: 28rem;
+	grid-row: 23/51 ;
+	grid-column: 3/29 ; /*pセットの位置*/
+}
+
+.tour_box>p{
+	font-size: 1.8rem;
+	border-bottom: 3px #333 solid;
+	padding-top: 2rem; 
+}
+
+.tour01_h,
+.tour02_h,
+.tour03_h{
+	color: #fff;
+	font-size: 3rem;
+	text-align: center;
+	text-transform: uppercase; 
+	border: 1px #000 solid;
+	width: 14rem;
+	height: 4rem;
+	background-color: rgba(0,0,0,0.4);
+	grid-row: 17/21 ; /* なんで21/25じゃないんだろうか？*/
+	grid-column: 14/28 ; /* 見出しの位置 */
+	z-index: 1;
+}
+
+/*--------4th-pageここまで-------------------------------
+-------------------------------------------------------*/
+
+/*--------5th-pageここから-------------------------------
+-------------------------------------------------------*/
+
+.fifth{
+	width: auto;
+	height: 80rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	align-items: center; 
+	position: relative;
+}
+
+.bg-video {
+	position: absolute; /* 親要素のsection-storiesにrelative */
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+	z-index: -1; /* これで背景みたいに */
+	opacity: .85;
+	overflow: hidden; /* はみ出た場合 */
+}
+  
+.bg-video__content {
+  	height: 100%;
+	width: 100%;
+	object-fit: cover; /* タテヨコ比を固定している 動画で崩れるとおかしい */
+}
+
+.main-5th{
+	font-size: 5rem;
+	text-align: center;
+	margin: 7rem 0 0 0;
+	background: linear-gradient(to left , #654206 , #5b4d23 , rgb(45, 45, 45));
+	background-clip: text;
+  	-webkit-background-clip: text;
+  	-webkit-text-fill-color: transparent;
+}
+
+.people-comment{
+	width: 65rem;
+	height: 20rem;
+	background-color: #fff ;
+	border: rgb(71, 71, 71) .25rem solid;
+	box-shadow: 3px 3px 3px rgba(0,0,0,0.4);
+	overflow:hidden;
+	opacity: .7;
+	transform: skewY(-6deg);
+}
+
+.face{
+	transform: skewY(6deg);
+	width: 18rem;
+	height: 18rem;
+	border-radius: 50%; 
+	padding: 1rem ;
+	float: left;
+	shape-outside: circle(50% at 50% 50%);
+}
+
+.people-comment>h3{
+	transform: skewY(2deg);
+	font-size: 2.5rem;
+}
+
+.people-comment>p{
+	transform: skewY(2deg);
+	font-size: 1.7rem;
+}
+
+/*--------5th-pageここまで-------------------------------
+-------------------------------------------------------*/
+
+/*--------footer-pageここから-------------------------------
+-------------------------------------------------------*/
+
+footer{
+	background-color: #f1f1f1;
+	width: auto;
+	height: 30rem;
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+.tori-icon_2{
+	align-self: center;
+	margin-top:5rem;
+}
+
+.footer_contents{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+}
+
+.footer_contents>p{
+	font-size: 1.4rem;
+	border-top: 2px #666 solid;
+	width: 40rem;
+	height: 25rem;
+	margin-top: 11rem;
+	text-align: center;
+}
+
+.footer_contents ul li{
+	font-size: 1.4rem;
+	border-top: 2px #666 solid;
+	width: 8rem;
+	height: 25rem;
+	margin-top: 10rem;
+	list-style: none;
+	float: left;
+	cursor: pointer;
+	text-align: center;
+	padding: 0;
+}
+
+.footer_contents ul li:hover{
+	color: rgba(51, 51, 51, 0.50);
+}
+
+/*--------footer-pageここまで-------------------------------
+-------------------------------------------------------*/
